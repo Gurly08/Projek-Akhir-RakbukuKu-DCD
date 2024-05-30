@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RakbukuKu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<header class="navbar">RakbukuKu</header>
+<body>
+    <main>
+        <div class="container">
+           <form id="add-book"> 
+            <h1 align="center">Masukan Buku Baru</h1>
+                <div class="form-book-element">
+                    <label>Judul</label>
+                    <input id="judul" type="text" placeholder="masukan judul" value="" maxlength="25" required><br>
+                </div>
+                <div class="form-book-element">
+                    <label>Penulis</label>
+                    <input id="penulis" type="text" placeholder="masukan nama penulis" value="" maxlength="25" required> <br>
+                </div>
+                <div class="form-book-element">
+                    <label>Tahun</label>
+                    <input id="tahun" type="text" placeholder="masukan judul" value="" maxlength="4" required> <br>
+                </div>
+                <div class="form-book-element">
+                    <input id="checkbox" type="checkbox" value="">
+                    <label>Sudah dibaca</label>
+                </div>
+                <div class="form-book-element">
+                    <button id="tambahbuku" type="submit">Masukan Buku ke <strong>Belum Dibaca</strong></button> 
+                </div>
+           </form>
+        </div>
+
+        <div class="search">
+            <h1 align="center">Cari Buku</h1>
+            <label>Cari Judul/Penulis</label>
+            <input class="cari" type="text" id="search" placeholder="Masukan buku favorit kamu">
+            <button id="searchbtn">Cari</button>
+        </div>
+
+        <div class="rak-buku">
+            <div class="mulai-baca">
+                <h1 align="center">Belum Dibaca</h1>
+                <ul id="copmplated"></ul>
+            </div>
+            <div class="selesai-baca">
+                <h1 align="center">Sudah Dibaca</h1>
+                <ul id="uncomplated"></ul>
+            </div>
+        </div>
+    </main>
+</body>
+<footer class="footer">
+    <div class="footer-description">
+        <p><strong>Bagas Djunaedi</strong> @2024 Front-End Web</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</html>
