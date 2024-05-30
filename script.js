@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p>Tahun Terbit: ${book.tahun}</p>
             </div>
             <div>
-                <button class="move-button">${book.isComplete ? "Selesai Dibaca" : "Belum Selesai Dibaca"
+                <button class="move-button">${book.checkbox ? "Selesai Dibaca" : "Belum Selesai Dibaca"//perubahan1
                 }</button>
                 <button class="delete-button">Hapus</button>
             </div>
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const moveButton = listbookItem.querySelector(".move-button");
             moveButton.addEventListener("click", () => {
-                book.isComplete = !book.isComplete;
+                book.checkbox = !book.checkbox;
                 saveBooksToLocalStorage(books)
                 updateRakBukuKu();
             });
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
-            if (book.isComplete) {
+            if (book.checkbox) {
                 complated.appendChild(listbookItem);
             } else {
                 uncomplated.appendChild(listbookItem);
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const judul = judulInput.value;
         const penulis = penulisInput.value;
         const tahun = presentInt(tahunInput.value);
-        const isComplete = Checkbox.checked;
+        const checkbox = Checkbox.checked;
 
         if (judul && penulis && tahun) {
             const books = loadBooksFromLocalStorage();
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 judul,
                 penulis,
                 tahun,
-                isComplete,
+                checkbox,
             };
 
             books.push(newBook);
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p>Tahun Terbit: ${book.tahun}</p>
                     </div>
                     <div>
-                        <button class="move-button">${book.isComplete ? "Selesai Dibaca" : "Belum Selesai Dibaca"
+                        <button class="move-button">${book.checkbox ? "Selesai Dibaca" : "Belum Selesai Dibaca"
                     }</button>
                         <button class="delete-button">Hapus</button>
                     </div>
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const moveButton = listbookItem.querySelector(".move-button");
                 moveButton.addEventListener("click", () => {
-                    book.isComplete = !book.isComplete;
+                    book.checkbox = !book.checkbox;
                     saveBooksToLocalStorage(books)
                     updateRakBukuKu();
                 });
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
 
-                if (book.isComplete) {
+                if (book.checkbox) {
                     complated.appendChild(listbookItem);
                 } else {
                     uncomplated.appendChild(listbookItem);
