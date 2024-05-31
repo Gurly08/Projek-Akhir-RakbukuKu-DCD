@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     text-align: center;
     padding: 3%;
     background-color: rgb(12, 91, 128);
@@ -7,13 +7,13 @@
     color: white;
 }
 
-body{
-    margin: 0%;
-    padding: 0%;
+body {
+    margin: 0;
+    padding: 0;
     background-color: rgb(245, 245, 245);
 }
 
-.container{
+.container {
     margin-top: 18px;
     margin-right: 25px;
     margin-left: 25px;
@@ -23,7 +23,7 @@ body{
     background-color: rgba(24, 88, 117, 0.264);
 }
 
-.add-book{
+.add-book {
     background-color: #fff;
     border: 1px solid #000000;
     padding: 20px;
@@ -34,30 +34,30 @@ body{
 
 input[type="number"],
 input[type="text"] {
-  width: 98%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 2px solid rgb(222, 222, 222);
-  border-radius: 10px;
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid rgb(222, 222, 222);
+    border-radius: 10px;
 }
 
-.form-book-element{
+.form-book-element {
     padding-left: 18px;
     padding-bottom: 18px;
 }
 
-.form-book-element > label{
+.form-book-element > label {
     font-weight: 600;
     font-size: 20px;
 }
 
-.form-book-element > button{
+.form-book-element > button {
     font-size: 20px;
     padding: 8px;
     border-radius: 18px;
 }
 
-.search{
+.search {
     margin-top: 18px;
     margin-right: 25px;
     margin-left: 25px;
@@ -68,21 +68,21 @@ input[type="text"] {
     padding-left: 18px;
 }
 
-.search > .cari{
+.search > .cari {
     width: 90%;
 }
 
-.search > label{
+.search > label {
     font-size: 25px;
 }
 
-.search button{
+.search button {
     padding: 10px;
     border-radius: 8px;
     font-size: 15px;
 }
 
-.mulai-baca{
+.mulai-baca {
     margin-top: 18px;
     margin-right: 25px;
     margin-left: 25px;
@@ -96,17 +96,17 @@ input[type="text"] {
 ul {
     list-style: none;
     padding: 0;
-  }
-  
-  li {
+}
+
+li {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px;
-  }
+}
 
-.selesai-baca{
+.selesai-baca {
     margin-top: 18px;
     margin-right: 25px;
     margin-left: 25px;
@@ -124,4 +124,5 @@ ul {
     padding: 1.2rem;
     text-align: center;
     margin-top: 20px;
-  }
+}
+

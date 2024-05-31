@@ -1,42 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const BOOKS_KEY = "rakbukuku";
-    const judulInput = document.getElementById("judul");
-    const penulisInput = document.getElementById("penulis");
-    const tahunInput = document.getElementById("tahun");
-    const Checkbox = document.getElementById("checkbox");
-    const tambahBuku = document.getElementById("tambahbuku");
+    const BOOKS_KEY = "bookshelf";
+    const titleInput = document.getElementById("title");
+    const authorInput = document.getElementById("author");
+    const yearInput = document.getElementById("year");
+    const isComplateInput = document.getElementById("isComplate");
+    const tambahBuku = document.getElementById("add-book");
     const searchInput = document.getElementById("search");
-    const searchButton = document.getElementById("searchbtn")
-    const complated = document.getElementById("complated");
-    const uncomplated = document.getElementById("uncomplated");
+    const searchButton = document.getElementById("searchbtn");
+    const completed = document.getElementById("completed");
+    const uncompleted = document.getElementById("uncompleted");
 
-    //pembuatan kondisi penyimpanan kedalam LS
+    // Save books to Local Storage
     function saveBooksToLocalStorage(books) {
         localStorage.setItem(BOOKS_KEY, JSON.stringify(books));
     }
 
-    //pembuatan kondisi pengambilan data dari LS
+    // Load books from Local Storage
     function loadBooksFromLocalStorage() {
         const booksData = localStorage.getItem(BOOKS_KEY);
         return booksData ? JSON.parse(booksData) : [];
     }
 
-    //pembuatan kondisi update penyimpanan LS
+    // Update the bookshelf UI
     function updateRakBukuKu() {
         const books = loadBooksFromLocalStorage();
-        complated.innerHTML = "";
-        uncomplated.innerHTML = "";
+        completed.innerHTML = "";
+        uncompleted.innerHTML = "";
 
         books.forEach((book) => {
             const listbookItem = document.createElement("li");
             listbookItem.innerHTML = `
             <div>
-                <p>Judul Buku: ${book.judul}</p>
-                <p>Penulis Buku: ${book.penulis}</p>
-                <p>Tahun Terbit: ${book.tahun}</p>
+                <p>title Buku: ${book.title}</p>
+                <p>author Buku: ${book.author}</p>
+                <p>year Terbit: ${book.year}</p>
             </div>
             <div>
-                <button class="move-button">${book.checkbox ? "Selesai Dibaca" : "Belum Selesai Dibaca"//perubahan1
+                <button class="move-button">${book.isComplate ? "Belum Dibaca" : "Sudah Selesai Dibaca"
                 }</button>
                 <button class="delete-button">Hapus</button>
             </div>
@@ -44,126 +44,128 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const moveButton = listbookItem.querySelector(".move-button");
             moveButton.addEventListener("click", () => {
-                book.checkbox = !book.checkbox;
-                saveBooksToLocalStorage(books)
+                book.isComplate = !book.isComplate;
+                saveBooksToLocalStorage(books);
                 updateRakBukuKu();
             });
 
-            const delateButton = listbookItem.querySelector('.delate-button');
-            delateButton.addEventListener('click', () => {
+            const deleteButton = listbookItem.querySelector('.delete-button');
+            deleteButton.addEventListener('click', () => {
                 const bookIndex = books.findIndex((b) => b.id === book.id);
-                if (bookIndex) {
+                if (bookIndex !== -1) {
                     books.splice(bookIndex, 1);
-                    saveBooksToLocalStorage();
+                    saveBooksToLocalStorage(books);
                     updateRakBukuKu();
                 }
             });
 
-            if (book.checkbox) {
-                complated.appendChild(listbookItem);
+            if (book.isComplate) {
+                completed.appendChild(listbookItem);
             } else {
-                uncomplated.appendChild(listbookItem);
+                uncompleted.appendChild(listbookItem);
             }
         });
     }
 
-    tambahBuku.addEventListener('click', () => {
-        const judul = judulInput.value;
-        const penulis = penulisInput.value;
-        const tahun = presentInt(tahunInput.value);
-        const checkbox = Checkbox.checked;
+    tambahBuku.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-        if (judul && penulis && tahun) {
+        const title = titleInput.value;
+        const author = authorInput.value;
+        const year = parseInt(yearInput.value);
+        const isComplate = isComplateInput.checked;
+
+        if (title && author && year) {
             const books = loadBooksFromLocalStorage();
             const newBook = {
                 id: +new Date(),
-                judul,
-                penulis,
-                tahun,
-                checkbox,
+                title,
+                author,
+                year,
+                isComplate,
             };
 
             books.push(newBook);
             saveBooksToLocalStorage(books);
 
-            judulInput.value = '';
-            penulisInput.value = '';
-            tahunInput.value = '';
-            Checkbox.checked = false;
+            titleInput.value = '';
+            authorInput.value = '';
+            yearInput.value = '';
+            isComplateInput.checked = false;
 
             updateRakBukuKu();
         }
     });
 
-    searchButton.addEventListener('click', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const books = loadBooksFromLocalStorage();
-        const filterreadBooks = books.filter(
-            (book) =>
-                book.judul.toLowerCase().includes(searchTerm) ||
-                book.penulis.toLowerCase().includes(searchTerm) ||
-                book.tahun.toSting().includes(searchTerm)
-        );
-
-        updateRakBukuKuWithSearch(filterreadBooks);
+    searchButton.addEventListener("click", () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const books = loadBooksFromLocalStorage();
+      const filteredBooks = books.filter(
+        (book) =>
+          book.title.toLowerCase().includes(searchTerm) ||
+          book.author.toLowerCase().includes(searchTerm) ||
+          book.year.toString().includes(searchTerm)
+      );
+  
+      updateRakBukuKuWithSearch(filteredBooks);
     });
-
-    //Pembuatan kondisi updating penyimpanan rakbukuku
+  
     function updateRakBukuKuWithSearch(books) {
-        const searchTerm = searchInput.value.toLowerCase();
-        complated.innerHTML = '';
-        uncomplated.innerHTML = '';
-
-        books.forEach((book) => {
-            const { judul, penulis, tahun } = book;
-            const lowercaseJudul = judul.toLowerCase();
-            const lowercasePenulis = penulis.toLowerCase();
-            const tahunString = tahun.toSting();
-
-            if (
-                lowercaseJudul.includes(searchTerm) ||
-                lowercasePenulis.includes(searchTerm) ||
-                tahunString.includes(searchTerm)
-            ) {
-                const listbookItem = document.createElement('li');
-                listbookItem.innerHTML = `
-                    <div>
-                        <p>Judul Buku: ${book.judul}</p>
-                        <p>Penulis Buku: ${book.penulis}</p>
-                        <p>Tahun Terbit: ${book.tahun}</p>
-                    </div>
-                    <div>
-                        <button class="move-button">${book.checkbox ? "Selesai Dibaca" : "Belum Selesai Dibaca"
-                    }</button>
-                        <button class="delete-button">Hapus</button>
-                    </div>
-                `;
-
-                const moveButton = listbookItem.querySelector(".move-button");
-                moveButton.addEventListener("click", () => {
-                    book.checkbox = !book.checkbox;
-                    saveBooksToLocalStorage(books)
-                    updateRakBukuKu();
-                });
-
-                const delateButton = listbookItem.querySelector('.delate-button');
-                delateButton.addEventListener('click', () => {
-                    const bookIndex = books.findIndex((b) => b.id === book.id);
-                    if (bookIndex) {
-                        books.splice(bookIndex, 1);
-                        saveBooksToLocalStorage();
-                        updateRakBukuKu();
-                    }
-                });
-
-                if (book.checkbox) {
-                    complated.appendChild(listbookItem);
-                } else {
-                    uncomplated.appendChild(listbookItem);
-                }
+      const searchTerm = searchInput.value.toLowerCase();
+      completed.innerHTML = "";
+      uncompleted.innerHTML = "";
+  
+      books.forEach((book) => {
+        const { title, author, year } = book;
+        const lowercaseTitle = title.toLowerCase();
+        const lowercaseAuthor = author.toLowerCase();
+        const yearString = year.toString();
+  
+        if (
+          lowercaseTitle.includes(searchTerm) ||
+          lowercaseAuthor.includes(searchTerm) ||
+          yearString.includes(searchTerm)
+        ) {
+          const listbookItem = document.createElement("li");
+          listbookItem.innerHTML = `
+            <div>
+              <p>Judul Buku: ${book.title}</p>
+              <p>Penulis Buku: ${book.author}</p>
+              <p>Tahun Terbit: ${book.year}</p>
+            </div>
+            <div>
+              <button class="move-button">${
+                book.isComplete ? "Selesai Dibaca" : "Sudah Selesai Dibaca"
+              }</button>
+              <button class="delete-button">Hapus</button>
+            </div>
+          `;
+  
+          const moveButton = listbookItem.querySelector(".move-button");
+          moveButton.addEventListener("click", () => {
+            book.isComplete = !book.isComplete;
+            saveBooksToLocalStorage(books);
+            updateRakBukuKu();
+          });
+  
+          const deleteButton = listbookItem.querySelector(".delete-button");
+          deleteButton.addEventListener("click", () => {
+            const bookIndex = books.findIndex((b) => b.id === book.id);
+            if (bookIndex !== -1) {
+              books.splice(bookIndex, 1);
+              saveBooksToLocalStorage(books);
+              updateRakBukuKuWithSearch(books);
             }
-        });
+          });
+  
+          if (book.isComplete) {
+            completed.appendChild(listbookItem);
+          } else {
+            uncompleted.appendChild(listbookItem);
+          }
+        }
+      });
     }
-
-    updateRakBukuKu();
-});
+    
+      updateRakBukuKu();
+    });

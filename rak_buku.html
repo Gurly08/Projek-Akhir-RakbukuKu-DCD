@@ -14,22 +14,22 @@
             <h1 align="center">Masukan Buku Baru</h1>
                 <div class="form-book-element">
                     <label>Judul</label>
-                    <input id="judul" type="text" placeholder="masukan judul" value=""  required><br>
+                    <input id="title" type="text" placeholder="masukan judul" value=""  required><br>
                 </div>
                 <div class="form-book-element">
                     <label>Penulis</label>
-                    <input id="penulis" type="text" placeholder="masukan nama penulis" value="" required> <br>
+                    <input id="author" type="text" placeholder="masukan nama penulis" value="" required> <br>
                 </div>
                 <div class="form-book-element">
                     <label>Tahun</label>
-                    <input id="tahun" type="text" placeholder="masukan judul" value="" maxlength="4" required> <br>
+                    <input id="year" type="text" placeholder="masukan judul" value="" maxlength="4" required> <br>
                 </div>
                 <div class="form-book-element">
-                    <input id="checkbox" type="checkbox" value="">
+                    <input id="isComplate" type="checkbox" value="">
                     <label>Sudah dibaca</label>
                 </div>
                 <div class="form-book-element">
-                    <button id="tambahbuku" type="submit">Masukan Buku ke <strong>Belum Dibaca</strong></button> 
+                    <button id="tambahbuku">Masukan Buku ke <strong>Belum Dibaca</strong></button> 
                 </div>
            </form>
         </div>
@@ -43,12 +43,12 @@
 
         <div class="rak-buku">
             <div class="mulai-baca">
-                <h1 align="center">Belum Dibaca</h1>
-                <ul id="complated"></ul>
+                <h1 align="center">Sudah Dibaca</h1>
+                <ul id="completed"></ul>
             </div>
             <div class="selesai-baca">
-                <h1 align="center">Sudah Dibaca</h1>
-                <ul id="uncomplated"></ul>
+                <h1 align="center">Belum Dibaca</h1>
+                <ul id="uncompleted"></ul>
             </div>
         </div>
     </main>
